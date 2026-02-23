@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WARDIERE.INC — Control operacional para flotas de drones</title>
+  <meta name="description" content="Plataforma SaaS para planificar, coordinar, validar cumplimiento y auditar operaciones con drones. Flota, operadores, misiones, espacio aéreo y reportes en un solo sistema." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="bg">
+    <div class="grid"></div>
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
+  </div>
+
+  <header class="top">
+    <div class="container topbar">
+      <a class="brand" href="#top" aria-label="WARDIERE.INC">
+        <span class="logo" aria-hidden="true"></span>
+        <span class="brandText">
+          <span class="brandName">WARDIERE<span class="dot">.</span>INC</span>
+          <span class="brandTag">Drone Ops Control</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="#producto">Producto</a>
+        <a href="#flujo">Flujo</a>
+        <a href="#modulos">Módulos</a>
+        <a href="#industrias">Industrias</a>
+        <a href="#kpis">KPIs</a>
+        <a href="#pricing">Pricing</a>
+      </nav>
+
+      <div class="topActions">
+        <button class="btn ghost" id="btnTheme" type="button" aria-label="Cambiar tema">
+          <span class="icon" aria-hidden="true">◐</span>
+          Tema
+        </button>
+        <a class="btn primary" href="#cta">Solicitar demo</a>
+      </div>
+
+      <button class="hamburger" id="btnMenu" aria-label="Abrir menú" type="button">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobile" id="mobileMenu" aria-hidden="true">
+      <div class="container mobileInner">
+        <a href="#producto" class="mLink">Producto</a>
+        <a href="#flujo" class="mLink">Flujo</a>
+        <a href="#modulos" class="mLink">Módulos</a>
+        <a href="#industrias" class="mLink">Industrias</a>
+        <a href="#kpis" class="mLink">KPIs</a>
+        <a href="#pricing" class="mLink">Pricing</a>
+        <div class="mDivider"></div>
+        <a class="btn primary full" href="#cta">Solicitar demo</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container heroGrid">
+        <div class="heroCopy">
+          <div class="pill">
+            <span class="badge">SaaS</span>
+            <span>Planificación + Cumplimiento + Auditoría para flotas de drones</span>
+          </div>
+
+          <h1>
+            Control operacional de punta a punta para
+            <span class="grad">misiones con drones</span>.
+          </h1>
+
+          <p class="sub">
+            Centraliza flota, operadores, misiones, validación de espacio aéreo y reportes automáticos en un solo flujo auditable.
+            Menos errores de ruta, menos cancelaciones, más seguridad y eficiencia.
+          </p>
+
+          <div class="heroStats">
+            <div class="stat">
+              <div class="statK" data-count="62">0</div>
+              <div class="statL">min ahorrados por misión</div>
+            </div>
+            <div class="stat">
+              <div class="statK" data-count="38">0</div>
+              <div class="statL">% menos cancelaciones</div>
+            </div>
+            <div class="stat">
+              <div class="statK" data-count="4">0</div>
+              <div class="statL">módulos core integrados</div>
+            </div>
+          </div>
+
+          <div class="heroCtas">
+            <a class="btn primary" href="#demo">Ver demo</a>
+            <a class="btn ghost" href="#flujo">Ver flujo de uso</a>
+          </div>
+
+          <div class="trust">
+            <span class="tLabel">Diseñado para operaciones repetitivas de alto riesgo/costo:</span>
+            <div class="tRow">
+              <span class="chip">Energía</span>
+              <span class="chip">Minería</span>
+              <span class="chip">Construcción</span>
+              <span class="chip">Seguridad</span>
+              <span class="chip">Agro</span>
+              <span class="chip">Gobierno</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="heroCard">
+          <div class="cardHead">
+            <div class="cardTitle">
+              <span class="spark" aria-hidden="true"></span>
+              <div>
+                <div class="cardK">Panel Operacional</div>
+                <div class="cardS">Trazabilidad: dron → operador → misión → zona → resultado</div>
+              </div>
+            </div>
+            <div class="cardMeta">
+              <span class="tag">Auditable</span>
+              <span class="tag">Roles</span>
+              <span class="tag">KPIs</span>
+            </div>
+          </div>
+
+          <div class="miniGrid">
+            <div class="mini">
+              <div class="miniH">Flota activa</div>
+              <div class="miniV" id="miniFleet">—</div>
+              <div class="miniF">Disponibles para asignación</div>
+            </div>
+            <div class="mini">
+              <div class="miniH">Misiones hoy</div>
+              <div class="miniV" id="miniMissions">—</div>
+              <div class="miniF">Ejecución + auditoría</div>
+            </div>
+            <div class="mini">
+              <div class="miniH">Cumplimiento</div>
+              <div class="miniV" id="miniCompliance">—</div>
+              <div class="miniF">Validación espacio aéreo</div>
+            </div>
+            <div class="mini">
+              <div class="miniH">Riesgo operativo</div>
+              <div class="miniV" id="miniRisk">—</div>
+              <div class="miniF">Bloqueos automáticos</div>
+            </div>
+          </div>
+
+          <div class="cardBody">
+            <div class="timeline">
+              <div class="tlItem">
+                <div class="dot"></div>
+                <div class="tlText">
+                  <div class="tlK">Planificación</div>
+                  <div class="tlS">Plantillas, rutas, altitud, checklists</div>
+                </div>
+              </div>
+              <div class="tlItem">
+                <div class="dot"></div>
+                <div class="tlText">
+                  <div class="tlK">Validación</div>
+                  <div class="tlS">Zonas, límites, reglas, autorización</div>
+                </div>
+              </div>
+              <div class="tlItem">
+                <div class="dot"></div>
+                <div class="tlText">
+                  <div class="tlK">Ejecución</div>
+                  <div class="tlS">Asignación dron + operador, bitácora</div>
+                </div>
+              </div>
+              <div class="tlItem">
+                <div class="dot"></div>
+                <div class="tlText">
+                  <div class="tlK">Reporte</div>
+                  <div class="tlS">KPIs, tendencias, optimización de rutas</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="cardFoot">
+              <div class="pulse"></div>
+              <div class="footText">Motor de reglas actualizable + historial de cambios para regulación cambiante.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="producto">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>Problema real, solución operativa</h2>
+          <p>
+            Sin control central, una flota crece y aparecen errores: rutas mal definidas, cumplimiento difícil, mantenimiento desordenado y costos altos.
+            WARDIERE.INC convierte procesos manuales en un flujo controlado y auditable.
+          </p>
+        </div>
+
+        <div class="features">
+          <article class="feature">
+            <div class="fIcon">⌁</div>
+            <h3>Coordinación multi-dron</h3>
+            <p>Asignación y trazabilidad completa por misión: qué dron, qué operador, dónde, cuándo, y con qué resultado.</p>
+          </article>
+          <article class="feature">
+            <div class="fIcon">⟠</div>
+            <h3>Planificación automatizada</h3>
+            <p>Rutas, horarios, altitud, objetivos, plantillas por tipo de operación y checklists pre/post vuelo.</p>
+          </article>
+          <article class="feature">
+            <div class="fIcon">⛨</div>
+            <h3>Cumplimiento antes de volar</h3>
+            <p>Validación de restricciones de espacio aéreo: permitido, restringido o requiere autorización; geocercas y límites.</p>
+          </article>
+          <article class="feature">
+            <div class="fIcon">⌁</div>
+            <h3>Mantenimiento inteligente</h3>
+            <p>Historial técnico, alertas, vencimientos y bloqueos automáticos si el dron no está apto para operar.</p>
+          </article>
+          <article class="feature">
+            <div class="fIcon">◌</div>
+            <h3>Auditoría y evidencia</h3>
+            <p>Registro de eventos, incidentes, cancelaciones, telemetría y archivos asociados (mapas, fotos, reportes).</p>
+          </article>
+          <article class="feature">
+            <div class="fIcon">∿</div>
+            <h3>Decisiones basadas en datos</h3>
+            <p>KPIs, tendencias, rendimiento por dron/operador y optimización de rutas con reportes ejecutivos.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="flujo">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>Flujo de uso</h2>
+          <p>Así se usa en operación real: onboarding → planificación → cumplimiento → ejecución → mantenimiento → reportes. En demo puedes simular el flujo completo.</p>
+        </div>
+
+        <div class="flow">
+          <div class="flowLeft" role="tablist" aria-label="Flujo">
+            <button class="flowStep active" type="button" data-flow="onboarding" role="tab" aria-selected="true">
+              <span class="fsIcon">①</span>
+              <span class="fsText">
+                <span class="fsK">Onboarding</span>
+                <span class="fsS">Cargar flota, operadores, zonas y plantillas</span>
+              </span>
+            </button>
+
+            <button class="flowStep" type="button" data-flow="plan" role="tab" aria-selected="false">
+              <span class="fsIcon">②</span>
+              <span class="fsText">
+                <span class="fsK">Planificación</span>
+                <span class="fsS">Crear misión con ruta, altitud, objetivo y checklist</span>
+              </span>
+            </button>
+
+            <button class="flowStep" type="button" data-flow="compliance" role="tab" aria-selected="false">
+              <span class="fsIcon">③</span>
+              <span class="fsText">
+                <span class="fsK">Cumplimiento</span>
+                <span class="fsS">Validar zonas, reglas y autorizaciones antes de volar</span>
+              </span>
+            </button>
+
+            <button class="flowStep" type="button" data-flow="ops" role="tab" aria-selected="false">
+              <span class="fsIcon">④</span>
+              <span class="fsText">
+                <span class="fsK">Ejecución</span>
+                <span class="fsS">Asignar dron+operador y registrar bitácora/evidencia</span>
+              </span>
+            </button>
+
+            <button class="flowStep" type="button" data-flow="maint" role="tab" aria-selected="false">
+              <span class="fsIcon">⑤</span>
+              <span class="fsText">
+                <span class="fsK">Mantenimiento</span>
+                <span class="fsS">Alertas, bloqueos y programación por estado técnico</span>
+              </span>
+            </button>
+
+            <button class="flowStep" type="button" data-flow="reports" role="tab" aria-selected="false">
+              <span class="fsIcon">⑥</span>
+              <span class="fsText">
+                <span class="fsK">Reportes</span>
+                <span class="fsS">KPIs, auditoría, tendencias y optimización de rutas</span>
+              </span>
+            </button>
+
+            <div class="flowActions">
+              <a class="btn ghost full" href="#demo">Ir al demo</a>
+              <button class="btn primary full" id="btnRunFlow" type="button">Simular flujo completo</button>
+            </div>
+          </div>
+
+          <div class="flowRight">
+            <div class="flowCard" id="flowCard" role="tabpanel">
+              <div class="flowTop">
+                <div class="flowTitle" id="flowTitle">Onboarding</div>
+                <div class="flowHint" id="flowHint">Carga inicial para operar sin improvisación</div>
+              </div>
+
+              <div class="flowBody">
+                <div class="flowGrid">
+                  <div class="flowBox">
+                    <div class="fbK">Entrada</div>
+                    <div class="fbS" id="flowIn">Flota + Operadores + Zonas + Plantillas</div>
+                  </div>
+                  <div class="flowBox">
+                    <div class="fbK">Control</div>
+                    <div class="fbS" id="flowCtrl">Reglas + Roles + Validaciones mínimas</div>
+                  </div>
+                  <div class="flowBox">
+                    <div class="fbK">Salida</div>
+                    <div class="fbS" id="flowOut">Operación trazable lista para auditar</div>
+                  </div>
+                </div>
+
+                <div class="flowBullets" id="flowBullets"></div>
+
+                <div class="flowCTA">
+                  <button class="btn ghost" id="btnFlowToDemo" type="button">Usar valores random en demo</button>
+                  <button class="btn ghost" id="btnFlowCreate" type="button">Crear misión desde demo</button>
+                  <button class="btn ghost" id="btnFlowExport" type="button">Exportar reporte</button>
+                </div>
+              </div>
+
+              <div class="flowFoot">
+                <div class="pulse"></div>
+                <div class="flowFootText" id="flowFootText">Resultado: operación controlada + cumplimiento + auditoría.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flowNote">
+          <div class="noteCard">
+            <div class="noteK">Lo que se vende</div>
+            <div class="noteS">
+              Un sistema que obliga a operar bien: bloquea riesgos, reduce cancelaciones y deja evidencia auditable. No es “un panel”, es control operacional.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="demo">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>Demo interactivo (modo presentación)</h2>
+          <p>
+            Simula un flujo real: crear misión, asignar dron+operador, validar zona y generar reporte. Todo queda registrado.
+          </p>
+        </div>
+
+        <div class="demo">
+          <div class="demoLeft">
+            <div class="panel">
+              <div class="panelHead">
+                <h3>Planificador de misión</h3>
+                <div class="panelHint">Validación automática antes de volar</div>
+              </div>
+
+              <form class="form" id="missionForm" autocomplete="off">
+                <div class="row2">
+                  <label class="field">
+                    <span class="label">Objetivo</span>
+                    <select id="fObjective" required>
+                      <option value="Inspección de infraestructura">Inspección de infraestructura</option>
+                      <option value="Seguridad perimetral">Seguridad perimetral</option>
+                      <option value="Topografía / mapping">Topografía / mapping</option>
+                      <option value="Agri Data (mapeo por campaña)">Agri Data (mapeo por campaña)</option>
+                      <option value="Logística (ruta corta)">Logística (ruta corta)</option>
+                    </select>
+                  </label>
+
+                  <label class="field">
+                    <span class="label">Zona</span>
+                    <select id="fZone" required>
+                      <option value="Z-01 (Industrial)">Z-01 (Industrial)</option>
+                      <option value="Z-02 (Urbana)">Z-02 (Urbana)</option>
+                      <option value="Z-03 (Cercana a aeropuerto)">Z-03 (Cercana a aeropuerto)</option>
+                      <option value="Z-04 (Minería)">Z-04 (Minería)</option>
+                      <option value="Z-05 (Reserva/Restricción alta)">Z-05 (Reserva/Restricción alta)</option>
+                    </select>
+                  </label>
+                </div>
+
+                <div class="row2">
+                  <label class="field">
+                    <span class="label">Altitud (m)</span>
+                    <input id="fAltitude" type="number" min="10" max="500" value="120" required />
+                  </label>
+
+                  <label class="field">
+                    <span class="label">Ruta</span>
+                    <select id="fRoute" required>
+                      <option value="Ruta A (lineal)">Ruta A (lineal)</option>
+                      <option value="Ruta B (zigzag)">Ruta B (zigzag)</option>
+                      <option value="Ruta C (perimetral)">Ruta C (perimetral)</option>
+                      <option value="Ruta D (grid mapping)">Ruta D (grid mapping)</option>
+                    </select>
+                  </label>
+                </div>
+
+                <div class="row2">
+                  <label class="field">
+                    <span class="label">Dron</span>
+                    <select id="fDrone" required></select>
+                  </label>
+
+                  <label class="field">
+                    <span class="label">Operador</span>
+                    <select id="fOperator" required></select>
+                  </label>
+                </div>
+
+                <div class="row2">
+                  <label class="field">
+                    <span class="label">Fecha/Hora</span>
+                    <input id="fDatetime" type="datetime-local" required />
+                  </label>
+
+                  <label class="field">
+                    <span class="label">Checklist</span>
+                    <select id="fChecklist" required>
+                      <option value="Estándar (pre/post)">Estándar (pre/post)</option>
+                      <option value="Crítica (alto riesgo)">Crítica (alto riesgo)</option>
+                      <option value="Rápida (operación corta)">Rápida (operación corta)</option>
+                    </select>
+                  </label>
+                </div>
+
+                <div class="actions">
+                  <button class="btn primary" type="submit">Crear misión</button>
+                  <button class="btn ghost" id="btnRandom" type="button">Random</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="panel">
+              <div class="panelHead">
+                <h3>Motor de reglas (espacio aéreo)</h3>
+                <div class="panelHint">Auditable: quién aprobó, con qué regla, cuándo</div>
+              </div>
+              <div class="rules">
+                <div class="rule">
+                  <div class="rk">Z-03 (Cercana a aeropuerto)</div>
+                  <div class="rs">Altitud máx. 60m · Requiere autorización</div>
+                </div>
+                <div class="rule">
+                  <div class="rk">Z-05 (Restricción alta)</div>
+                  <div class="rs">Bloqueo por defecto · Solo con aprobación</div>
+                </div>
+                <div class="rule">
+                  <div class="rk">Dron fuera de servicio</div>
+                  <div class="rs">No asignable · Bloqueo automático</div>
+                </div>
+                <div class="rule">
+                  <div class="rk">Licencia vencida</div>
+                  <div class="rs">No asignable · Bloqueo automático</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="demoRight">
+            <div class="panel tall">
+              <div class="panelHead">
+                <h3>Consola operacional</h3>
+                <div class="panelHint">Registro de misión + validación + reporte</div>
+              </div>
+
+              <div class="consoleTop">
+                <div class="kpiRow">
+                  <div class="kpi">
+                    <div class="kpiK">Misiones</div>
+                    <div class="kpiV" id="kMissions">0</div>
+                    <div class="kpiS">creadas hoy</div>
+                  </div>
+                  <div class="kpi">
+                    <div class="kpiK">Aprobadas</div>
+                    <div class="kpiV" id="kApproved">0</div>
+                    <div class="kpiS">permitidas</div>
+                  </div>
+                  <div class="kpi">
+                    <div class="kpiK">Bloqueadas</div>
+                    <div class="kpiV" id="kBlocked">0</div>
+                    <div class="kpiS">riesgo alto</div>
+                  </div>
+                  <div class="kpi">
+                    <div class="kpiK">Batería</div>
+                    <div class="kpiV" id="kBattery">—</div>
+                    <div class="kpiS">promedio estimado</div>
+                  </div>
+                </div>
+
+                <div class="legend">
+                  <span class="lg ok">Permitida</span>
+                  <span class="lg warn">Requiere autorización</span>
+                  <span class="lg bad">Bloqueada</span>
+                  <span class="lg info">Flujo</span>
+                </div>
+              </div>
+
+              <div class="log" id="log" aria-live="polite"></div>
+
+              <div class="consoleActions">
+                <button class="btn ghost" id="btnExport" type="button">Exportar reporte</button>
+                <button class="btn ghost" id="btnClear" type="button">Limpiar</button>
+                <button class="btn primary" id="btnSeed" type="button">Simular 5 misiones</button>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panelHead">
+                <h3>Reportes que vende el producto</h3>
+                <div class="panelHint">Listos para auditoría y gerencia</div>
+              </div>
+              <div class="reports">
+                <div class="rep">Historial de vuelos por dron</div>
+                <div class="rep">Rendimiento de operadores</div>
+                <div class="rep">Mantenimiento programado</div>
+                <div class="rep">Zonas con mayor restricción aérea</div>
+                <div class="rep">Optimización de rutas</div>
+                <div class="rep">Consumo de batería promedio</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demoNote">
+          <div class="noteCard">
+            <div class="noteK">Pitch corto</div>
+            <div class="noteS">
+              WARDIERE.INC centraliza la operación con drones: planificación de misiones, asignación de flota y operadores, validación del espacio aéreo y reportes automáticos.
+              Reduce errores de ruta, baja costos operativos y mejora la seguridad al convertir procesos manuales en un flujo controlado y auditable.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="modulos">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>Módulos core</h2>
+          <p>El “core” está diseñado para trazabilidad total y escalado de flota: drones ↔ operadores ↔ misiones ↔ espacio aéreo.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="cardTop">
+              <div class="cIcon">🛩</div>
+              <div>
+                <h3>Gestión de flota</h3>
+                <p class="muted">ID, modelo, autonomía, carga, estado técnico, historial.</p>
+              </div>
+            </div>
+            <ul class="bullets">
+              <li>Disponibilidad para asignación</li>
+              <li>Alertas de mantenimiento y vencimientos</li>
+              <li>Consumo promedio por tipo de misión</li>
+              <li>Costos operativos por uso</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="cardTop">
+              <div class="cIcon">👤</div>
+              <div>
+                <h3>Operadores</h3>
+                <p class="muted">Licencias, experiencia, disponibilidad, bitácora.</p>
+              </div>
+            </div>
+            <ul class="bullets">
+              <li>Calendario y disponibilidad</li>
+              <li>Métricas de desempeño</li>
+              <li>Control documental (vigencias)</li>
+              <li>Roles y permisos</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="cardTop">
+              <div class="cIcon">🧭</div>
+              <div>
+                <h3>Misiones</h3>
+                <p class="muted">Ruta, altitud, objetivo, plantillas y checklists.</p>
+              </div>
+            </div>
+            <ul class="bullets">
+              <li>Registro de eventos e incidentes</li>
+              <li>Replanificación y cancelaciones</li>
+              <li>Evidencia asociada (telemetría, fotos)</li>
+              <li>Auditoría completa</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="cardTop">
+              <div class="cIcon">⛨</div>
+              <div>
+                <h3>Espacio aéreo y cumplimiento</h3>
+                <p class="muted">Zonas, restricciones, altitudes, autorizaciones.</p>
+              </div>
+            </div>
+            <ul class="bullets">
+              <li>Validación previa (permitida/restringida)</li>
+              <li>Geocercas y límites</li>
+              <li>Registro de conformidad auditable</li>
+              <li>Motor de reglas actualizable</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="industrias">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>Casos de uso por industria</h2>
+          <p>Se vende por vertical: problemas concretos, flujo repetible y reportes que gerencia entiende.</p>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Industrias">
+          <button class="tab active" data-tab="infra" type="button" role="tab" aria-selected="true">Infraestructura / Energía</button>
+          <button class="tab" data-tab="mineria" type="button" role="tab" aria-selected="false">Minería / Construcción</button>
+          <button class="tab" data-tab="seg" type="button" role="tab" aria-selected="false">Seguridad / Emergencias</button>
+          <button class="tab" data-tab="agro" type="button" role="tab" aria-selected="false">Agro / Agri Data</button>
+          <button class="tab" data-tab="serv" type="button" role="tab" aria-selected="false">Servicios con drones</button>
+        </div>
+
+        <div class="tabPanels">
+          <div class="tabPanel show" id="tab-infra" role="tabpanel">
+            <div class="tp">
+              <h3>Inspección repetitiva + evidencia</h3>
+              <p>Planificación recurrente (líneas/torres/paneles) con rutas, altitudes y reportes estandarizados para auditoría.</p>
+              <div class="tpGrid">
+                <div class="tpCard">Plantillas por activo</div>
+                <div class="tpCard">Evidencia por misión</div>
+                <div class="tpCard">KPIs por dron/operador</div>
+                <div class="tpCard">Optimización de rutas</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tabPanel" id="tab-mineria" role="tabpanel">
+            <div class="tp">
+              <h3>Zonas restringidas + control de riesgo</h3>
+              <p>Validación previa y bloqueos automáticos. Trazabilidad completa para seguridad y cumplimiento.</p>
+              <div class="tpGrid">
+                <div class="tpCard">Geocercas</div>
+                <div class="tpCard">Autorizaciones</div>
+                <div class="tpCard">Bitácoras</div>
+                <div class="tpCard">Reportes ejecutivos</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tabPanel" id="tab-seg" role="tabpanel">
+            <div class="tp">
+              <h3>Coordinación multi-dron</h3>
+              <p>Misiones rápidas, registro de eventos e incidentes, y auditoría para post-operación.</p>
+              <div class="tpGrid">
+                <div class="tpCard">Asignación inmediata</div>
+                <div class="tpCard">Registro de incidentes</div>
+                <div class="tpCard">Tiempos de respuesta</div>
+                <div class="tpCard">Trazabilidad legal</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tabPanel" id="tab-agro" role="tabpanel">
+            <div class="tp">
+              <h3>Mapeo por campaña + consistencia</h3>
+              <p>Planificación por periodos, zonas y rutas tipo grid. Reportes de operación y consumo.</p>
+              <div class="tpGrid">
+                <div class="tpCard">Rutas grid mapping</div>
+                <div class="tpCard">Planificación por campaña</div>
+                <div class="tpCard">Eficiencia energética</div>
+                <div class="tpCard">Evidencia ordenada</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tabPanel" id="tab-serv" role="tabpanel">
+            <div class="tp">
+              <h3>Estandarizar y escalar flota</h3>
+              <p>Operación repetible con plantillas, checklists y reportes automáticos para clientes corporativos.</p>
+              <div class="tpGrid">
+                <div class="tpCard">Onboarding rápido</div>
+                <div class="tpCard">Auditoría por cliente</div>
+                <div class="tpCard">SLA y soporte</div>
+                <div class="tpCard">Add-ons por vertical</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kpis">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>KPIs para demostrar valor</h2>
+          <p>Métricas directas para vender “impacto” y justificar la suscripción.</p>
+        </div>
+
+        <div class="kpiGrid">
+          <div class="kpiCard">
+            <div class="kpiTitle">Tiempo promedio de planificación</div>
+            <div class="kpiValue" data-count="55">0</div>
+            <div class="kpiDesc">minutos menos por misión vs. manual</div>
+          </div>
+          <div class="kpiCard">
+            <div class="kpiTitle">Tasa de cancelaciones</div>
+            <div class="kpiValue" data-count="31">0</div>
+            <div class="kpiDesc">% reducción por validación previa</div>
+          </div>
+          <div class="kpiCard">
+            <div class="kpiTitle">Utilización de flota</div>
+            <div class="kpiValue" data-count="22">0</div>
+            <div class="kpiDesc">% mejora (tiempo volado vs. disponible)</div>
+          </div>
+          <div class="kpiCard">
+            <div class="kpiTitle">Cumplimiento de mantenimiento</div>
+            <div class="kpiValue" data-count="18">0</div>
+            <div class="kpiDesc">% mejora con alertas y bloqueos</div>
+          </div>
+          <div class="kpiCard">
+            <div class="kpiTitle">Incidentes por hora de vuelo</div>
+            <div class="kpiValue" data-count="12">0</div>
+            <div class="kpiDesc">% reducción por checklists</div>
+          </div>
+          <div class="kpiCard">
+            <div class="kpiTitle">Productividad por operador</div>
+            <div class="kpiValue" data-count="27">0</div>
+            <div class="kpiDesc">% mejora por plantillas y trazabilidad</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="pricing">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>Modelo de ingresos</h2>
+          <p>Suscripción por flota + add-ons. Estructura simple para vender y escalar.</p>
+        </div>
+
+        <div class="pricing">
+          <article class="priceCard">
+            <div class="pcTop">
+              <div class="pcName">Starter</div>
+              <div class="pcPrice">
+                <span class="pcMoney">$</span><span class="pcNum">149</span><span class="pcPer">/mes</span>
+              </div>
+              <div class="pcSub">Para equipos pequeños con operación recurrente</div>
+            </div>
+            <ul class="pcList">
+              <li>Hasta 5 drones</li>
+              <li>Hasta 10 operadores</li>
+              <li>Misiones + checklists</li>
+              <li>Reportes básicos</li>
+              <li>Soporte estándar</li>
+            </ul>
+            <a class="btn ghost full" href="#cta">Empezar</a>
+          </article>
+
+          <article class="priceCard featured">
+            <div class="ribbon">Más vendido</div>
+            <div class="pcTop">
+              <div class="pcName">Business</div>
+              <div class="pcPrice">
+                <span class="pcMoney">$</span><span class="pcNum">399</span><span class="pcPer">/mes</span>
+              </div>
+              <div class="pcSub">Para flotas en crecimiento que necesitan auditoría</div>
+            </div>
+            <ul class="pcList">
+              <li>Hasta 20 drones</li>
+              <li>Operadores ilimitados</li>
+              <li>Validación avanzada de zonas</li>
+              <li>Auditoría + roles</li>
+              <li>KPIs + tendencias</li>
+            </ul>
+            <a class="btn primary full" href="#cta">Solicitar demo</a>
+          </article>
+
+          <article class="priceCard">
+            <div class="pcTop">
+              <div class="pcName">Enterprise</div>
+              <div class="pcPrice">
+                <span class="pcMoney">$</span><span class="pcNum">—</span><span class="pcPer"></span>
+              </div>
+              <div class="pcSub">Gobierno y corporativos con SLA e integraciones</div>
+            </div>
+            <ul class="pcList">
+              <li>Flota ilimitada</li>
+              <li>SLA + soporte dedicado</li>
+              <li>Integraciones y SSO</li>
+              <li>Almacenamiento de evidencia</li>
+              <li>Módulos sectoriales</li>
+            </ul>
+            <a class="btn ghost full" href="#cta">Cotizar</a>
+          </article>
+        </div>
+
+        <div class="addons">
+          <div class="addon">
+            <div class="aK">Add-ons</div>
+            <div class="aS">Analítica avanzada · Evidencia/almacenamiento · Integraciones · Módulos sectoriales (Agro/Mapping)</div>
+          </div>
+          <div class="addon">
+            <div class="aK">Servicios</div>
+            <div class="aS">Onboarding · Migración de datos · Capacitación · Configuración de reglas · Plantillas · KPIs</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cta">
+      <div class="container">
+        <div class="cta">
+          <div class="ctaLeft">
+            <h2>Haz que una flota de drones se opere como una línea de producción</h2>
+            <p>
+              Menos improvisación. Más control. Más auditoría. WARDIERE.INC está hecho para venderse por impacto:
+              seguridad, costos, eficiencia y cumplimiento.
+            </p>
+            <div class="ctaPoints">
+              <div class="pt">Cumplimiento legal automático</div>
+              <div class="pt">Trazabilidad estricta</div>
+              <div class="pt">Planificación automatizada</div>
+              <div class="pt">Reportes para gerencia</div>
+            </div>
+          </div>
+
+          <div class="ctaRight">
+            <div class="formCard">
+              <div class="fcHead">
+                <div class="fcTitle">Solicitar demo</div>
+                <div class="fcSub">Recibe una demo guiada + caso de uso por tu industria</div>
+              </div>
+
+              <form id="leadForm" class="lead" autocomplete="off">
+                <label class="field">
+                  <span class="label">Empresa</span>
+                  <input id="lCompany" type="text" placeholder="Ej: Energía Andina" required />
+                </label>
+
+                <label class="field">
+                  <span class="label">Correo</span>
+                  <input id="lEmail" type="email" placeholder="tu@empresa.com" required />
+                </label>
+
+                <label class="field">
+                  <span class="label">Tamaño de flota</span>
+                  <select id="lFleet" required>
+                    <option value="1-5">1–5 drones</option>
+                    <option value="6-20" selected>6–20 drones</option>
+                    <option value="21-50">21–50 drones</option>
+                    <option value="50+">50+ drones</option>
+                  </select>
+                </label>
+
+                <label class="field">
+                  <span class="label">Industria</span>
+                  <select id="lIndustry" required>
+                    <option>Infraestructura / Energía</option>
+                    <option>Minería / Construcción</option>
+                    <option>Seguridad / Emergencias</option>
+                    <option>Agro / Agri Data</option>
+                    <option>Servicios con drones</option>
+                    <option>Gobierno</option>
+                    <option>Logística</option>
+                  </select>
+                </label>
+
+                <button class="btn primary full" type="submit">Enviar solicitud</button>
+
+                <div class="fine" id="leadMsg" aria-live="polite"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <div class="fLeft">
+            <div class="brandMini">
+              <span class="logo sm" aria-hidden="true"></span>
+              <span>WARDIERE.INC</span>
+            </div>
+            <div class="muted">Software de planificación y gestión de operaciones con drones.</div>
+          </div>
+          <div class="fRight">
+            <a href="#top">Volver arriba</a>
+            <a href="#flujo">Flujo</a>
+            <a href="#demo">Demo</a>
+            <a href="#pricing">Pricing</a>
+          </div>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
